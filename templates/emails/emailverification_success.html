@@ -1,0 +1,19 @@
+<h5>
+    confirmation successfull. redirecting u to home page in
+    <div id="number"></div>
+</h5>
+<script>
+    number = document.getElementById("number");
+    seconds = 5;
+
+    number.innerHTML = seconds;
+
+    var x = setInterval(() => {
+        seconds -= 1;
+        number.innerHTML = seconds;
+        if (seconds < 0) {
+            clearInterval(x);
+            window.location = "http://localhost:8000/";
+        }
+    }, 1000);
+</script>
