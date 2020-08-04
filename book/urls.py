@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import static
 from .views import create_book,get_books
+from django.conf import settings
 
 urlpatterns = [
     path('',get_books),
@@ -9,3 +11,5 @@ urlpatterns = [
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
