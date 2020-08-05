@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./LR.css";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export class LR extends Component {
     constructor(props) {
@@ -46,6 +47,12 @@ export class LR extends Component {
                     success:
                         "A confirmation email has been sent to provieded email",
                 });
+            } else if (res.data.token && login) {
+                Cookies.set("token", res.data.token, {
+                    sameSite: "none",
+                    secure: true,
+                });
+                window.location.href = "http://127.0.0.1:3000";
             }
         } catch (e) {
             if (e.response) {
@@ -62,6 +69,12 @@ export class LR extends Component {
             console.log(e);
         }
         this.setState({ loading: false });
+    };
+
+    componentDidMount = () => {
+        if (Cookies.get("token")) {
+            window.location.href = "http://127.0.0.1:3000";
+        }
     };
 
     render() {

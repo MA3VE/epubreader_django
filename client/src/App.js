@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Home from "./pages/Home";
 import LR from "./pages/LR";
-import Reader from "./pages/Reader";
+import Home from "./pages/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import { Container } from "@material-ui/core";
 import "./bootstrap.min.css";
@@ -11,9 +10,8 @@ export class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/Reader" component={Reader} exact></Route>
-                    <Route path="/login" component={LR} exact></Route>
                     <Route path="/" component={Home} exact></Route>
+                    <Route path="/login" component={LR} exact></Route>
                 </Switch>
             </Router>
         );
