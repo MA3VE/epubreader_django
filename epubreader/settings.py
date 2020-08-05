@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/',
+    'http://localhost:3000/',
     'http://127.0.0.1:3000/'
 )
 
