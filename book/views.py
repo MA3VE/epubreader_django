@@ -21,7 +21,7 @@ def create_book(request, *args, **kwargs):
     serializer.initial_data["user"] = request.user.id
     # with zipfile.ZipFile(serializer.initial_data.get("book"), 'r') as my_zip:
     #     if "cover.jpeg" in my_zip.namelist():
-    #         serializer.initial_data["cover"] = my_zip.read("cover.jpeg")
+    #         serializer.initial_data["cover"] = my_zip.open("cover.jpeg")
     if(serializer.is_valid(raise_exception=True)):
         book = serializer.save()
     return Response(serializer.data)

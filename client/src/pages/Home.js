@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import BookPreview from "../components/BookPreview";
-// import Reader from "../components/Reader";
+import Reader from "../components/Reader";
 import UploadBook from "../components/UploadBook";
 
 export class Home extends Component {
@@ -12,6 +12,7 @@ export class Home extends Component {
         this.state = {
             token: null,
             books: [],
+            toread: "",
         };
     }
 
@@ -34,33 +35,35 @@ export class Home extends Component {
         }
     };
 
+    getToRead = (bookid) => {
+        console.log("clicked");
+        this.setState({ toread: this.state.books[bookid].book });
+        // this.setState({ toread: });
+    };
+
     render() {
         return (
-            <div className="container">
-                {/* <button
-                    className="btn-primary btn-sm "
-                    style={{ marginTop: "10px" }}
-                >
-                    upload a new book
-                </button> */}
-                <UploadBook token={this.state.token} />
-                <div className="row">
-                    {this.state.books.map((book, i) => {
-                        return (
-                            <div
-                                className="col-md-4"
-                                key={i}
-                                style={{ marginTop: "10px" }}
-                            >
-                                <BookPreview
-                                    title={book.title}
-                                    cover={book.cover}
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
+            <>
+                {!this.state.toread ? (
+                    <div className="container">
+                        <UploadBook token={this.state.token} />
+                        {this.state.books.map((book, i) => {
+                            return (
+                                <div className="row mb-2" key={i}>
+                                    <BookPreview
+                                        title={book.title}
+                                        cover={book.cover}
+                                        bookid={i}
+                                        getToRead={this.getToRead}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <Reader toread={this.state.toread} />
+                )}
+            </>
         );
     }
 }

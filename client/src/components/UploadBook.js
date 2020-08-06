@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import jszip from "jszip";
+import epub from "epubjs";
 
 export class UploadBook extends Component {
     constructor(props) {
