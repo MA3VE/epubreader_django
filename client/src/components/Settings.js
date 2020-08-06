@@ -5,7 +5,7 @@ export class Settings extends Component {
         return (
             <div>
                 <button className="btn Settings-btn" style={{ float: "right" }}>
-                    <i className="fa fa-bars"></i>
+                    <i className="material-icons">settings</i>
                 </button>
             </div>
         );

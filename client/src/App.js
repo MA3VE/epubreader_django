@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import { Container } from "@material-ui/core";
 import "./bootstrap.min.css";
 import "./App.css";
+
 export class App extends Component {
     render() {
         return (

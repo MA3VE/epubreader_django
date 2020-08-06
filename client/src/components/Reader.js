@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { ReactReader } from "react-reader";
-import Toc from "./Toc";
 import Navbar from "./Navbar";
 
 export class Reader extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { width: 0, height: 0, toc: null, redentiton: null };
+        this.state = { width: 0, height: 0, toc: null, rendition: null };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
@@ -30,11 +29,15 @@ export class Reader extends Component {
                     maxWidth: this.state.width,
                 }}
             >
-                <Navbar width={this.state.width} />
+                <Navbar
+                    width={this.state.width}
+                    tocs={this.state.toc}
+                    rendition={this.state.rendition}
+                />
                 <div
                     style={{
                         position: "relative",
-                        height: this.state.height - 25,
+                        height: this.state.height - 30,
                     }}
                 >
                     <ReactReader
@@ -45,8 +48,8 @@ export class Reader extends Component {
                         tocChanged={(toc) => {
                             this.setState({ toc });
                         }}
-                        getRendition={(redentiton) => {
-                            this.setState({ redentiton });
+                        getRendition={(rendition) => {
+                            this.setState({ rendition });
                         }}
                         style={{
                             position: "relative",
