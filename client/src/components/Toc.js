@@ -38,7 +38,7 @@ export class Toc extends Component {
                         this.setState({ visible: false });
                     }}
                 >
-                    <List>
+                    <List style={{ width: "200px" }}>
                         {tocs.tocs
                             ? tocs.tocs.map((toc, id) => {
                                   return (

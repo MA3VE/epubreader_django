@@ -4,7 +4,6 @@ import Toc from "./Toc";
 
 export class Navbar extends Component {
     render() {
-        // console.log(this.props.tocs);
         return (
             <div
                 style={{ height: 30, width: this.props.width }}
@@ -17,7 +16,14 @@ export class Navbar extends Component {
                     />
                 </div>
                 <div className="col">
-                    <Settings />
+                    <Settings
+                        rendition={this.props.rendition}
+                        token={this.props.token}
+                        theme={this.props.theme}
+                        fontSize={this.props.fontSize}
+                        changeFontSize={this.props.changeFontSize}
+                        changeTheme={this.props.changeTheme}
+                    />
                 </div>
             </div>
         );

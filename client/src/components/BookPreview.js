@@ -18,7 +18,13 @@ export class BookPreview extends Component {
                         <div
                             className="btn btn-primary btn-sm"
                             onClick={() => {
-                                this.props.getToRead(this.props.bookid);
+                                this.props.getToRead(this.props.id);
+                                this.props.getSettings(
+                                    this.props.fontSize,
+                                    this.props.bookid,
+                                    this.props.id,
+                                    this.props.page
+                                );
                             }}
                         >
                             Read

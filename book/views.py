@@ -36,3 +36,24 @@ def get_books(request, *args, **kwargs):
     serializer = Book_serialzier(
         qs, many=True, context={"user": request.user})
     return Response(serializer.data)
+
+
+@api_view(['PATCH', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def patch_book(request, *args, **kwargs):
+    print(request.data)
+    qs = Book_model.objects.filter(id=request.data.get("id"))
+    if not qs.exists():
+        return Response({"error": "book doesnt exits"})
+    book = qs.first()
+    if(request.data.get("text_size")):
+        book.text_size = request.data["text_size"]
+    if(request.data.get("theme")):
+        book.theme = request.data["theme"]
+    if(request.data.get("page")):
+        print("inside page")
+        book.page = request.data["page"]
+    book.save()
+
+    return Response({"success": True})

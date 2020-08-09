@@ -12,3 +12,5 @@ class Book_model(models.Model):
     author = models.CharField(max_length=50, blank=True, null=True)
     series = models.CharField(max_length=50, blank=True, null=True)
     series_no = models.IntegerField(blank=True, null=True)
+    text_size = models.IntegerField(default=25)
+    theme = models.CharField(max_length=10, default="day")

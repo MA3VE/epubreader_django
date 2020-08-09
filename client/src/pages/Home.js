@@ -13,6 +13,10 @@ export class Home extends Component {
             token: null,
             books: [],
             toread: "",
+            fontSize: null,
+            theme: null,
+            bookid: null,
+            page: null,
         };
     }
 
@@ -30,15 +34,19 @@ export class Home extends Component {
                 },
             });
             this.setState({ books: res.data });
-        } catch (e) {
-            console.log(e.response.data);
+        } catch (error) {
+            if (error.response.data) {
+                if (error.response.data.detail === "Invalid token.") {
+                    Cookies.remove("token");
+                    window.location.href = "http://127.0.0.1:3000";
+                }
+            }
         }
     };
 
     getToRead = (bookid) => {
         console.log("clicked");
         this.setState({ toread: this.state.books[bookid].book });
-        // this.setState({ toread: });
     };
 
     render() {
@@ -52,16 +60,38 @@ export class Home extends Component {
                                 <div className="row mb-2" key={i}>
                                     <BookPreview
                                         title={book.title}
-                                        cover={book.cover}
-                                        bookid={i}
+                                        bookid={book.id}
                                         getToRead={this.getToRead}
+                                        id={i}
+                                        getSettings={(
+                                            fontSize,
+                                            bookid,
+                                            id,
+                                            page
+                                        ) => {
+                                            this.setState({
+                                                fontSize,
+                                                bookid,
+                                                id,
+                                                page,
+                                            });
+                                        }}
+                                        fontSize={book.text_size}
+                                        theme={book.theme}
+                                        page={book.page}
                                     />
                                 </div>
                             );
                         })}
                     </div>
                 ) : (
-                    <Reader toread={this.state.toread} />
+                    <Reader
+                        toread={this.state.toread}
+                        token={this.state.token}
+                        fontSize={this.state.fontSize}
+                        bookid={this.state.bookid}
+                        page={this.state.page}
+                    />
                 )}
             </>
         );

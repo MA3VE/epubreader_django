@@ -3,7 +3,8 @@ from .serializers import (Register_serializer,
                           Login_serializer,
                           Create_password_reset_token_serializer,
                           Reset_password_serializer)
-from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from knox.auth import TokenAuthentication
 import jwt
 from django.conf import settings
@@ -11,6 +12,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template import loader
 from django.shortcuts import render
+
 # Create your views here.
 
 
@@ -46,6 +48,7 @@ def login_view(request, *args, **kwargs):
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def get_user_view(request, *args, **kwargs):
     return Response({"username": request.user.username, "email": request.user.email})
 
