@@ -35,9 +35,7 @@ export class LR extends Component {
 
         try {
             const res = await axios({
-                url: `http://localhost:8000/api/auth/${
-                    login ? "login" : "register"
-                }`,
+                url: `/api/auth/${login ? "login" : "register"}`,
                 method: "POST",
                 data: { username, password, email },
             });
@@ -52,7 +50,7 @@ export class LR extends Component {
                     sameSite: "none",
                     secure: true,
                 });
-                window.location.href = "http://127.0.0.1:3000";
+                window.location.href = "/";
             }
         } catch (e) {
             if (e.response) {
@@ -73,7 +71,7 @@ export class LR extends Component {
 
     componentDidMount = () => {
         if (Cookies.get("token")) {
-            window.location.href = "http://127.0.0.1:3000";
+            window.location.href = "/";
         }
     };
 

@@ -22,12 +22,12 @@ export class Home extends Component {
 
     componentDidMount = async () => {
         const token = Cookies.get("token");
-        if (!token) window.location.href = "http://127.0.0.1:3000/login";
+        if (!token) window.location.href = "login";
         this.setState({ token });
 
         try {
             const res = await axios({
-                url: "http://127.0.0.1:8000/api/book",
+                url: "/api/book",
                 method: "GET",
                 headers: {
                     Authorization: `Token ${token}`,
@@ -38,7 +38,7 @@ export class Home extends Component {
             if (error.response.data) {
                 if (error.response.data.detail === "Invalid token.") {
                     Cookies.remove("token");
-                    window.location.href = "http://127.0.0.1:3000";
+                    window.location.href = "/";
                 }
             }
         }

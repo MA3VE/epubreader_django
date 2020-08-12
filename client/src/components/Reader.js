@@ -38,7 +38,7 @@ export class Reader extends Component {
         this.state.rendition.themes.fontSize(fontSize + "px");
         this.setState({ fontSize });
         await axios.patch(
-            "http://127.0.0.1:8000/api/book/patch",
+            "/api/book/patch",
             { text_size: fontSize, id: this.state.bookid },
             {
                 headers: {
@@ -51,7 +51,7 @@ export class Reader extends Component {
 
     locationChanged = async (page) => {
         await axios.patch(
-            "http://127.0.0.1:8000/api/book/patch",
+            "api/book/patch",
             { page, id: this.state.bookid },
             {
                 headers: {
