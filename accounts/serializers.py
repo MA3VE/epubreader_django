@@ -6,6 +6,7 @@ import jwt
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import loader
+from jwt.exceptions import InvalidTokenError
 
 
 class Register_serializer(serializers.ModelSerializer):
@@ -54,7 +55,7 @@ class Create_password_reset_token_serializer(serializers.Serializer):
                                key=settings.JWT_SECRET_KEY).decode('utf-8')
 
         html_message = loader.render_to_string('emails/emailpasswordreset.html', {
-            "jwt_token": "http://localhost:8000/api/auth/resetpassword?token=" + jwt_token
+            "jwt_token": f"http://{settings.HOMEPAGE}/resetpassword?token=" + jwt_token
         })
         print(user.email)
         send_mail(subject='reset password', message='reset password token', recipient_list=[
@@ -67,7 +68,11 @@ class Reset_password_serializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
 
     def validate(self, data):
-        decoded = jwt.decode(data["jwt_token"], settings.JWT_SECRET_KEY)
+
+        try:
+            decoded = jwt.decode(data["jwt_token"], settings.JWT_SECRET_KEY)
+        except InvalidTokenError:
+            raise serializers.ValidationError("Invalid Token")
         qs = User.objects.filter(username=decoded["username"])
         print(decoded["username"])
         if not qs.exists():

@@ -11,5 +11,8 @@
     },
     "cacheDirectories": [
         "client/node_modules"
-    ]
+    ],
+    "dependencies": {
+        "query-string": "^6.13.1"
+    }
 }

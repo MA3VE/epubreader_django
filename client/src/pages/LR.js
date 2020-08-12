@@ -59,6 +59,11 @@ export class LR extends Component {
                 if (data.non_field_errors) {
                     this.setState({ error: data.non_field_errors[0] });
                 }
+                if (data.username) {
+                    this.setState({
+                        error: data.username[0],
+                    });
+                }
             } else {
                 this.setState({
                     error: "we encountered some error plz try again later",
@@ -190,6 +195,13 @@ export class LR extends Component {
                             >
                                 {!login ? "Login" : "Register"}
                             </button>
+                            <a
+                                href="/forgetpassword"
+                                style={{ float: "right" }}
+                                className="mt-2"
+                            >
+                                forget password?
+                            </a>
                         </div>
                     </div>
                 </div>

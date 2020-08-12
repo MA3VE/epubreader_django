@@ -83,8 +83,6 @@ def create_password_reset_token_view(request, *args, **kwargs):
 
 @api_view(['POST', 'UPDATE'])
 def reset_password_view(request, *args, **kwargs):
-    jwt_token = request.GET.get('token', None)
-    request.data["jwt_token"] = jwt_token
     print(request.data)
     reset_password_serializer = Reset_password_serializer(data=request.data)
     if reset_password_serializer.is_valid(raise_exception=True):
