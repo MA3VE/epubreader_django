@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fd-^2y&zza65l_xmpw#-*#nx!&auql%c1o3=+vimz&&h*!m2mc'
+SECRET_KEY = os.environ.get(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['epubreader.herokuapp.com', '127.0.0.0:3000',
+                 '127.0.0.1:8000', 'localhost:3000', 'localhost:8000']
 
 
 # Application definition
