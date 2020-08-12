@@ -27,14 +27,14 @@ export class Home extends Component {
 
         try {
             const res = await axios({
-                url: "/api/book",
+                url: "/api/book/",
                 method: "GET",
                 headers: {
                     Authorization: `Token ${token}`,
                 },
             });
             this.setState({ books: res.data });
-            console.log(res.data);
+            // console.log(res.data);
         } catch (error) {
             if (error.response.data) {
                 if (error.response.data.detail === "Invalid token.") {
@@ -56,6 +56,7 @@ export class Home extends Component {
             <>
                 {!this.state.toread ? (
                     <div className="container">
+                        {/* {console.log(this.state.books)} */}
                         <UploadBook token={this.state.token} />
                         {this.state.books.map((book, i) => {
                             return (

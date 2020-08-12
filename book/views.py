@@ -31,10 +31,12 @@ def create_book(request, *args, **kwargs):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_books(request, *args, **kwargs):
+    print("inside")
     qs = Book_model.objects.filter(
         user=request.user, )
     serializer = Book_serialzier(
         qs, many=True, context={"user": request.user})
+    print(serializer.data)
     return Response(serializer.data)
 
 

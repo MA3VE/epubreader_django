@@ -35,7 +35,7 @@ export class LR extends Component {
 
         try {
             const res = await axios({
-                url: `/api/auth/${login ? "login" : "register"}`,
+                url: `/api/auth/${login ? "login" : "register"}/`,
                 method: "POST",
                 data: { username, password, email },
             });

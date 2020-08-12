@@ -34,7 +34,7 @@ export class UploadBook extends Component {
         try {
             const res = await axios({
                 method: "POST",
-                url: "/api/book/create",
+                url: "/api/book/create/",
                 data: formData,
                 headers: {
                     "Content-Type": "multipart/form-data",

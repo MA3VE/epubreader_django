@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Size from "./Size";
-import Theme from "./Theme";
 
 export class Settings extends Component {
     constructor(props) {
@@ -17,7 +14,6 @@ export class Settings extends Component {
     }
 
     render() {
-        const tocs = this.props;
         return (
             <div>
                 <button
@@ -28,7 +24,7 @@ export class Settings extends Component {
                     }}
                     style={{ float: "right" }}
                 >
-                    <i class="material-icons">settings</i>
+                    <i className="material-icons">settings</i>
                 </button>
 
                 <Drawer

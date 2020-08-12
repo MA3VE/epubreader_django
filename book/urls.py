@@ -7,8 +7,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', get_books),
-    path('create', create_book),
-    path('patch', patch_book),
+    path('create/', create_book),
+    path('patch/', patch_book),
 
 ]
 
