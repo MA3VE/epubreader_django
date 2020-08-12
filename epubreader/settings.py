@@ -92,9 +92,9 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-# DATABASES['default'] = dj_database_url.config(
-#     default=os.environ.get('DATABASE_URL')
-# )
+DATABASES['default'] = dj_database_url.config(
+    default=os.environ.get('DATABASE_URL')
+)
 
 
 # Password validation
