@@ -34,6 +34,7 @@ export class Home extends Component {
                 },
             });
             this.setState({ books: res.data });
+            console.log(res.data);
         } catch (error) {
             if (error.response.data) {
                 if (error.response.data.detail === "Invalid token.") {
@@ -41,6 +42,7 @@ export class Home extends Component {
                     window.location.href = "/";
                 }
             }
+            console.log("error");
         }
     };
 

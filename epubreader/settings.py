@@ -26,8 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['epubreader.herokuapp.com', '127.0.0.0:3000',
-                 '127.0.0.1:8000', 'localhost:3000', 'localhost:8000']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
