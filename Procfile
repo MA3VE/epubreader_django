@@ -1,1 +1,1 @@
-web: gunicorn datasets.wsgi
+web: gunicorn epubreader.wsgi
