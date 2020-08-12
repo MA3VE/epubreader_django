@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template import loader
 from django.shortcuts import render
+from django.conf import settings
 
 # Create your views here.
 
@@ -27,7 +28,7 @@ def register_view(request, *args, **kwargs):
         # })
         try:
             html_message = loader.render_to_string('emails/emailverification.html', {
-                "confirmation_link": "http://localhost:8000/api/auth/confirmregistration?token=" + jwt_token
+                "confirmation_link": f"https://{settings.HOMEPAGE}/api/auth/confirmregistration?token=" + jwt_token
             })
             send_mail(subject="confirm registration", recipient_list=[
                       email], html_message=html_message, message="email verification", from_email='emailtesting17082000@gmail.com', fail_silently=False)
