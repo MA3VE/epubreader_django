@@ -3,6 +3,7 @@ import LR from "./pages/LR";
 import Home from "./pages/Home";
 import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ConfirmEmail from "./pages/ConfirmEmail";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./bootstrap.min.css";
 import "./App.css";
@@ -23,6 +24,11 @@ export class App extends Component {
                     <Route
                         path="/resetpassword"
                         component={ResetPassword}
+                        exact
+                    ></Route>
+                    <Route
+                        path="/confirmregistration"
+                        component={ConfirmEmail}
                         exact
                     ></Route>
                     <Route path="/" component={NOTFOUND}></Route>

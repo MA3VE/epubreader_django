@@ -40,7 +40,7 @@ export class Home extends Component {
             if (error.response.data) {
                 if (error.response.data.detail === "Invalid token.") {
                     Cookies.remove("token");
-                    window.location.href = "/";
+                    window.location.href = "/login";
                 }
             }
             console.log("error");

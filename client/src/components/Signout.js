@@ -19,7 +19,7 @@ export class Signout extends Component {
 
         try {
             Cookies.remove("token");
-            const res = await axios({
+            await axios({
                 url: "/api/auth/logout/",
                 method: "POST",
                 headers: {
