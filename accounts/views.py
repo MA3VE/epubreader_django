@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.template import loader
 from django.shortcuts import render
 from django.conf import settings
+from jwt.exceptions import InvalidTokenError
 
 # Create your views here.
 
@@ -23,12 +24,9 @@ def register_view(request, *args, **kwargs):
     if register_serializer.is_valid(raise_exception=True):
         jwt_token, email = register_serializer.save()
         print(jwt_token)
-        # html_message = loader.render_to_string('emailverification.html',{
-        #     "confirmation_link":"http://localhost:8000/api/auth/confirmregistration?token=" + jwt_token
-        # })
         try:
             html_message = loader.render_to_string('emails/emailverification.html', {
-                "confirmation_link": f"https://{settings.HOMEPAGE}/api/auth/confirmregistration?token=" + jwt_token
+                "confirmation_link": f"{settings.HOMEPAGE}/confirmregistration?token=" + jwt_token
             })
             send_mail(subject="confirm registration", recipient_list=[
                       email], html_message=html_message, message="email verification", from_email='emailtesting17082000@gmail.com', fail_silently=False)
@@ -54,23 +52,24 @@ def get_user_view(request, *args, **kwargs):
     return Response({"username": request.user.username, "email": request.user.email})
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def confirm_registration_view(request, *args, **kwargs):
-    jwt_token = request.GET.get('token', None)
-    print(jwt_token)
-
-    if(jwt_token):
+    jwt_token = request.data.get("jwt_token")
+    try:
         decoded = jwt.decode(jwt_token, settings.JWT_SECRET_KEY)
 
-        username = decoded["username"]
-        email = decoded["email"]
-        qs = User.objects.filter(username=username, email=email)
-        if not qs.exists():
-            return Response({"error": "user_not_exists"})
-        user = qs.first()
-        user.is_active = True
-        user.save()
-        return render(request=request, template_name='emails/emailverification_success.html')
+    except InvalidTokenError:
+        return Response({"non_field_errors": ['Invalid Token']}, status=403)
+
+    username = decoded["username"]
+    email = decoded["email"]
+    qs = User.objects.filter(username=username, email=email)
+    if not qs.exists():
+        return Response({"non_field_errors": ["user doesnt exists"]})
+    user = qs.first()
+    user.is_active = True
+    user.save()
+    return Response({"success": True})
 
 
 @api_view(['POST', 'UPDATE'])

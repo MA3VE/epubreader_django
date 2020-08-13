@@ -55,7 +55,7 @@ class Create_password_reset_token_serializer(serializers.Serializer):
                                key=settings.JWT_SECRET_KEY).decode('utf-8')
 
         html_message = loader.render_to_string('emails/emailpasswordreset.html', {
-            "jwt_token": f"http://{settings.HOMEPAGE}/resetpassword?token=" + jwt_token
+            "jwt_token": f"{settings.HOMEPAGE}/resetpassword?token=" + jwt_token
         })
         print(user.email)
         send_mail(subject='reset password', message='reset password token', recipient_list=[
