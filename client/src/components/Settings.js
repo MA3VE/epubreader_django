@@ -3,6 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Size from "./Size";
+import Signout from "./Signout";
 
 export class Settings extends Component {
     constructor(props) {
@@ -41,6 +42,9 @@ export class Settings extends Component {
                                 fontSize={this.props.fontSize}
                                 changeFontSize={this.props.changeFontSize}
                             />
+                        </ListItem>
+                        <ListItem>
+                            <Signout />
                         </ListItem>
                     </List>
                 </Drawer>

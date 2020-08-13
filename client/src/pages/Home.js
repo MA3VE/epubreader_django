@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import BookPreview from "../components/BookPreview";
 import Reader from "../components/Reader";
 import UploadBook from "../components/UploadBook";
+import Signout from "../components/Signout";
 
 export class Home extends Component {
     constructor(props) {
@@ -57,7 +58,15 @@ export class Home extends Component {
                 {!this.state.toread ? (
                     <div className="container">
                         {/* {console.log(this.state.books)} */}
-                        <UploadBook token={this.state.token} />
+                        <div className="row">
+                            <div className="col">
+                                <UploadBook token={this.state.token} />
+                            </div>
+                            <div className="col">
+                                <Signout />
+                            </div>
+                        </div>
+
                         {this.state.books.map((book, i) => {
                             return (
                                 <div className="row mb-2" key={i}>
